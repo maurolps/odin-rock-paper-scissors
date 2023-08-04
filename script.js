@@ -16,38 +16,36 @@ function playRound(playerSelection, computerSelection) {
   switch(playerSelection) {
     case "rock":
       switch(computerSelection) {
-        case "paper": //rock vs paper
-          return "You Lose! Paper covers Rock."
-          break;
-        case "scissors": //rock vs scissors
-          return "You Win! Rock breaks Scissors."
-          break;
-        default: //rock vs rock
+        case "paper": //rock vs paper - Lose
+          scoreComputer++
+          return "Paper covers Rock.";
+        case "scissors": //rock vs scissors - Win
+          scorePlayer++;  
+          return "Rock breaks Scissors.";
+        default: //rock vs rock - Draw
          return "Deuce."
-         break;
       }
-      break;
     case "paper":
       switch(computerSelection) {
-        case "paper": //paper vs paper
+        case "paper": //paper vs paper - Draw
           return "Deuce."
-          break;
-        case "scissors": //paper vs scissors
-          return "You Lose! Scissors cuts Paper."
-          break;
-        default: //paper vs rock
-          return "You Win! Paper covers Rock."
+        case "scissors": //paper vs scissors - Lose
+          scoreComputer++
+          return "Scissors cuts Paper."
+        default: //paper vs rock - Win
+        scorePlayer++;
+          return "Paper covers Rock.";
       }
     case "scissors":
       switch(computerSelection) {
-        case "paper"://scissors vs paper
-          return "You Win! Scissors cuts Paper."
-          break;
-        case "scissors"://scissors vs scissors
+        case "paper"://scissors vs paper - Win
+          scorePlayer++;
+          return "Scissors cuts Paper."
+        case "scissors"://scissors vs scissors - Draw
           return "Deuce."
-          break;
-        default: //scissors vs rock
-          return "You Lose! Rock breaks Scissors."
+        default: //scissors vs rock - Lose
+          scoreComputer++
+          return "Rock breaks Scissors."
       }
     default:
       return "Please, select only: rock, paper or scissors."
@@ -56,18 +54,29 @@ function playRound(playerSelection, computerSelection) {
 
 function game() {
   for (let x = 0; x < 5; x++) {
-    let choice = prompt("Welcome to Rock, Paper, Scissors. Your turn:","Rock");
+    let choice = prompt("Welcome to Rock, Paper, Scissors. Your turn: ("+(x+1)+"/5)","Rock");
     playerSelection = choice.toLowerCase();
     computerSelection = getComputerChoice();
-    console.log(playerSelection)
     console.log(playRound(playerSelection, computerSelection));
   }
-
+  console.log("Your Score: " +scorePlayer+ " NPC Score: " +scoreComputer);
+  if (scorePlayer > scoreComputer)  {
+    console.log("You Win!"); 
+    return
+  }
+    else 
+      if (scorePlayer < scoreComputer) {
+      console.log("You Lose!");
+      return
+      }
+  console.log("Draw!")
+      
 }
 
 let scorePlayer = 0;
 let scoreComputer = 0;
 let playerSelection = "";
 let computerSelection = "";
-
-game();
+ 
+game(); 
+ 
