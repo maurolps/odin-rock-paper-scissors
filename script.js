@@ -48,10 +48,23 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function updateScore(message) {
-  winner.textContent = message;
   score.textContent = "Your Score: " +scorePlayer+ " NPC Score: " +scoreComputer;
-  winnerContainer.appendChild(winner);
   scoreContainer.appendChild(score);
+  if (scorePlayer > 4) {
+    winner.textContent = "You Win!";
+    scorePlayer= 0;
+    scoreComputer = 0;
+    return;
+  }
+  if (scoreComputer > 4) {
+    winner.textContent = "You Lose! Try again";
+    scorePlayer = 0;
+    scoreComputer = 0;
+    return;
+  }
+  winner.textContent = message;
+  winnerContainer.appendChild(winner);
+
 }
 
 function game(playerSelection) {
