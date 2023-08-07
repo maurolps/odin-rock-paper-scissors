@@ -1,10 +1,5 @@
 /*
 The Odin Project - Rock, Paper, Scissors.
-
-Reminder:
-rock > scissors
-paper > rock
-scissors > paper
 */
 
 function getComputerChoice () {
@@ -52,31 +47,30 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function game() {
-  for (let x = 0; x < 5; x++) {
-    let choice = prompt("Welcome to Rock, Paper, Scissors. Your turn: ("+(x+1)+"/5)","Rock");
-    playerSelection = choice.toLowerCase();
-    computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));
-  }
-  console.log("Your Score: " +scorePlayer+ " NPC Score: " +scoreComputer);
-  if (scorePlayer > scoreComputer)  {
-    console.log("You Win!"); 
-    return
-  }
-    else 
-      if (scorePlayer < scoreComputer) {
-      console.log("You Lose!");
-      return
-      }
-  console.log("Draw!")
-      
+function updateScore(message) {
+  winner.textContent = message;
+  score.textContent = "Your Score: " +scorePlayer+ " NPC Score: " +scoreComputer;
+  winnerContainer.appendChild(winner);
+  scoreContainer.appendChild(score);
+}
+
+function game(playerSelection) {
+  computerSelection = getComputerChoice();
+  updateScore(playRound(playerSelection.target.id, computerSelection));
+
 }
 
 let scorePlayer = 0;
 let scoreComputer = 0;
-let playerSelection = "";
-let computerSelection = "";
- 
-game(); 
+
+const buttonChoice = document.querySelectorAll('button');
+const scoreContainer = document.querySelector('#score-container');
+const winnerContainer = document.querySelector('#winner-container');
+const score = document.createElement('div');
+const winner = document.createElement('div');
+
+score.classList.add('score');
+winner.classList.add('winner');
+buttonChoice.forEach((btn) => {btn.addEventListener('click', game)});
+
  
