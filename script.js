@@ -130,4 +130,3 @@ const playAgain = document.createElement('button');
 
 score.classList.add('score');
 buttonChoice.forEach((btn) => {btn.addEventListener('click', game)});
-tryAgain();
